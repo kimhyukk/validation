@@ -1,5 +1,6 @@
 package hello.itemservice.domain.item;
 
+import hello.itemservice.web.validation.dto.ItemUpdateDto;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -25,6 +26,13 @@ public class ItemRepository {
 
     public List<Item> findAll() {
         return new ArrayList<>(store.values());
+    }
+
+    public void update(Long itemId, ItemUpdateDto updateParam) {
+        Item findItem = findById(itemId);
+        findItem.setItemName(updateParam.getItemName());
+        findItem.setPrice(updateParam.getPrice());
+        findItem.setQuantity(updateParam.getQuantity());
     }
 
     public void update(Long itemId, Item updateParam) {
